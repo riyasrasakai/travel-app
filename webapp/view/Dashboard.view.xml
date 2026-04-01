@@ -1,0 +1,118 @@
+<mvc:View
+    controllerName="travelapp.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="Travel Request - Self Service">
+
+        <headerContent>
+            <Button
+                text="New Request"
+                type="Emphasized"
+                icon="sap-icon://add"
+                press=".onNewRequest" />
+        </headerContent>
+
+        <content>
+
+            <!-- Employee Info -->
+            <Panel class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd">
+                <content>
+                    <HBox alignItems="Center" class="sapUiSmallMargin">
+                        <Avatar initials="{dashboard>/initials}" displaySize="S" class="sapUiSmallMarginEnd" />
+                        <VBox>
+                            <Title text="{dashboard>/employeeName}" level="H4" />
+                            <Text text="{dashboard>/employeeId} | {dashboard>/department} | {dashboard>/designation}" />
+                            <Text text="Manager: {dashboard>/manager}" class="sapUiTinyMarginTop" />
+                        </VBox>
+                    </HBox>
+                </content>
+            </Panel>
+
+            <!-- Summary Tiles -->
+            <Title text="My Travel Summary" level="H4" class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" />
+
+            <FlexBox wrap="Wrap" class="sapUiSmallMarginBegin sapUiTinyMarginTop">
+
+                <GenericTile header="Total Requests" subheader="All Time"
+                    frameType="TwoByHalf" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+                    <tileContent>
+                        <TileContent unit="Requests">
+                            <content>
+                                <NumericContent value="{dashboard>/summary/total}" valueColor="Neutral" withMargin="false" />
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile header="Pending Approval" subheader="Awaiting Review"
+                    frameType="TwoByHalf" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+                    <tileContent>
+                        <TileContent unit="Requests">
+                            <content>
+                                <NumericContent value="{dashboard>/summary/pending}" valueColor="Critical" withMargin="false" />
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile header="Approved" subheader="This Year"
+                    frameType="TwoByHalf" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+                    <tileContent>
+                        <TileContent unit="Requests">
+                            <content>
+                                <NumericContent value="{dashboard>/summary/approved}" valueColor="Good" withMargin="false" />
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile header="Rejected" subheader="This Year"
+                    frameType="TwoByHalf" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+                    <tileContent>
+                        <TileContent unit="Requests">
+                            <content>
+                                <NumericContent value="{dashboard>/summary/rejected}" valueColor="Error" withMargin="false" />
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+            </FlexBox>
+
+            <!-- Recent Travel Requests -->
+            <Table items="{dashboard>/requests}" class="sapUiSmallMarginTop">
+
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="My Travel Requests" level="H4" />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column><Text text="Request ID" /></Column>
+                    <Column><Text text="Destination" /></Column>
+                    <Column><Text text="Purpose" /></Column>
+                    <Column><Text text="Travel Dates" /></Column>
+                    <Column><Text text="Status" /></Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{dashboard>requestId}" />
+                            <Text text="{dashboard>destination}" />
+                            <Text text="{dashboard>purpose}" />
+                            <Text text="{dashboard>travelDates}" />
+                            <ObjectStatus text="{dashboard>status}" state="{dashboard>statusState}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+
+        </content>
+    </Page>
+
+</mvc:View>

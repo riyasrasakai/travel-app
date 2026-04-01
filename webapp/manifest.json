@@ -1,0 +1,52 @@
+{
+    "_version": "1.21.0",
+    "sap.app": {
+        "id": "travelapp",
+        "type": "application",
+        "title": "Travel Request",
+        "description": "Employee Travel Request Management",
+        "applicationVersion": { "version": "1.0.0" }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "travelapp.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.108.0",
+            "libs": { "sap.m": {}, "sap.ui.core": {} }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": { "bundleName": "travelapp.i18n.i18n" }
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "path": "travelapp.view",
+                "controlId": "appNav",
+                "controlAggregation": "pages",
+                "async": true
+            },
+            "routes": [
+                { "pattern": "",              "name": "dashboard",    "target": "dashboard"    },
+                { "pattern": "travelRequest", "name": "travelRequest","target": "travelRequest"},
+                { "pattern": "confirmation",  "name": "confirmation", "target": "confirmation" }
+            ],
+            "targets": {
+                "dashboard":    { "id": "dashboard",    "type": "View", "name": "Dashboard"     },
+                "travelRequest":{ "id": "travelRequest","type": "View", "name": "TravelRequest" },
+                "confirmation": { "id": "confirmation", "type": "View", "name": "Confirmation"  }
+            }
+        }
+    }
+}

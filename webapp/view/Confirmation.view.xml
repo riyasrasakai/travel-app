@@ -1,0 +1,67 @@
+<mvc:View
+    controllerName="travelapp.controller.Confirmation"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page
+        title="Travel Request"
+        showNavButton="true"
+        navButtonPress=".onBackToDashboard">
+
+        <content>
+            <VBox class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop">
+
+                <!-- Success Banner -->
+                <MessageStrip
+                    text="Your travel request has been submitted successfully and is pending approval."
+                    type="Success"
+                    showIcon="true"
+                    class="sapUiSmallMarginBottom" />
+
+                <!-- Manager Notification -->
+                <MessageStrip
+                    text="Your travel request has been intimated to your manager, Mohammed Al-Qahtani."
+                    type="Information"
+                    showIcon="true"
+                    class="sapUiSmallMarginBottom" />
+
+                <!-- Request Summary -->
+                <Panel headerText="Request Summary" expandable="false" class="sapUiSmallMarginBottom">
+                    <content>
+                        <List showSeparators="Inner" backgroundDesign="Transparent">
+                            <DisplayListItem label="Request ID"          value="{confirmation>/requestId}" />
+                            <DisplayListItem label="Employee Name"       value="{confirmation>/employeeName}" />
+                            <DisplayListItem label="Employee ID"         value="{confirmation>/employeeId}" />
+                            <DisplayListItem label="Department"          value="{confirmation>/department}" />
+                            <DisplayListItem label="Reporting Manager"   value="{confirmation>/manager}" />
+                            <DisplayListItem label="Purpose of Travel"   value="{confirmation>/purpose}" />
+                            <DisplayListItem label="Destination"         value="{confirmation>/destination}" />
+                            <DisplayListItem label="Departure Date"      value="{confirmation>/departureDate}" />
+                            <DisplayListItem label="Return Date"         value="{confirmation>/returnDate}" />
+                            <DisplayListItem label="Duration"            value="{confirmation>/duration}" />
+                            <DisplayListItem label="Mode of Transport"   value="{confirmation>/modeOfTransport}" />
+                            <DisplayListItem label="Travel Class"        value="{confirmation>/travelClass}" />
+                            <DisplayListItem label="Accommodation"       value="{confirmation>/accommodation}" />
+                            <DisplayListItem label="Hotel Preference"    value="{confirmation>/hotel}" />
+                            <DisplayListItem label="Travel Cost"         value="{confirmation>/estimatedCost}" />
+                            <DisplayListItem label="Accommodation Cost"  value="{confirmation>/accommodationCost}" />
+                            <DisplayListItem label="Total Budget"        value="{confirmation>/totalCost}" />
+                            <DisplayListItem label="Business Justification" value="{confirmation>/justification}" />
+                            <DisplayListItem label="Submitted On"        value="{confirmation>/submittedOn}" />
+                            <DisplayListItem label="Status"              value="{confirmation>/status}" />
+                        </List>
+                    </content>
+                </Panel>
+
+                <Button
+                    text="Back to Dashboard"
+                    type="Emphasized"
+                    press=".onBackToDashboard"
+                    width="100%"
+                    class="sapUiSmallMarginBottom" />
+
+            </VBox>
+        </content>
+    </Page>
+
+</mvc:View>

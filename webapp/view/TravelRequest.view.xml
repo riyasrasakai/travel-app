@@ -1,0 +1,196 @@
+<mvc:View
+    controllerName="travelapp.controller.TravelRequest"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page
+        title="New Travel Request"
+        showNavButton="true"
+        navButtonPress=".onCancel">
+
+        <content>
+            <VBox class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop">
+
+                <!-- Traveler Information -->
+                <Panel headerText="Traveler Information" expandable="false" class="sapUiSmallMarginBottom">
+                    <content>
+                        <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+
+                            <Label text="Employee Name" design="Bold" />
+                            <Input id="employeeNameInput" value="John Doe" enabled="false" width="100%" class="sapUiSmallMarginBottom" />
+
+                            <Label text="Employee ID" design="Bold" />
+                            <Input id="employeeIdInput" value="EMP001" enabled="false" width="100%" class="sapUiSmallMarginBottom" />
+
+                            <Label text="Department" design="Bold" />
+                            <Input id="departmentInput" value="Engineering" enabled="false" width="100%" class="sapUiSmallMarginBottom" />
+
+                            <Label text="Reporting Manager" design="Bold" />
+                            <Input id="managerInput" value="Mohammed Al-Qahtani" enabled="false" width="100%" class="sapUiSmallMarginBottom" />
+
+                        </VBox>
+                    </content>
+                </Panel>
+
+                <!-- Trip Details -->
+                <Panel headerText="Trip Details" expandable="false" class="sapUiSmallMarginBottom">
+                    <content>
+                        <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+
+                            <Label text="Purpose of Travel *" design="Bold" />
+                            <Select id="purposeSelect" width="100%" class="sapUiSmallMarginBottom">
+                                <items>
+                                    <core:Item key="meeting"     text="Business Meeting" />
+                                    <core:Item key="conference"  text="Conference / Summit" />
+                                    <core:Item key="training"    text="Training / Workshop" />
+                                    <core:Item key="client"      text="Client Visit" />
+                                    <core:Item key="site"        text="Site Visit / Inspection" />
+                                    <core:Item key="exhibition"  text="Exhibition / Trade Show" />
+                                    <core:Item key="other"       text="Other" />
+                                </items>
+                            </Select>
+
+                            <Label text="Destination City *" design="Bold" />
+                            <Input id="destinationCityInput" placeholder="e.g. Dubai" width="100%" class="sapUiSmallMarginBottom" />
+
+                            <Label text="Destination Country *" design="Bold" />
+                            <Input id="destinationCountryInput" placeholder="e.g. United Arab Emirates" width="100%" class="sapUiSmallMarginBottom" />
+
+                            <Label text="Departure Date *" design="Bold" />
+                            <DatePicker
+                                id="departureDatePicker"
+                                placeholder="DD/MM/YYYY"
+                                valueFormat="dd/MM/yyyy"
+                                displayFormat="dd MMM yyyy"
+                                width="100%"
+                                class="sapUiSmallMarginBottom"
+                                change=".onDateChange" />
+
+                            <Label text="Return Date *" design="Bold" />
+                            <DatePicker
+                                id="returnDatePicker"
+                                placeholder="DD/MM/YYYY"
+                                valueFormat="dd/MM/yyyy"
+                                displayFormat="dd MMM yyyy"
+                                width="100%"
+                                class="sapUiSmallMarginBottom"
+                                change=".onDateChange" />
+
+                            <Label text="Duration" design="Bold" />
+                            <Input id="durationInput" placeholder="Auto calculated" enabled="false" width="100%" class="sapUiSmallMarginBottom" />
+
+                            <Label text="Mode of Transport *" design="Bold" />
+                            <Select id="transportSelect" width="100%" class="sapUiSmallMarginBottom" change=".onTransportChange">
+                                <items>
+                                    <core:Item key="flight" text="Flight" />
+                                    <core:Item key="train"  text="Train" />
+                                    <core:Item key="car"    text="Car / Road" />
+                                    <core:Item key="bus"    text="Bus / Coach" />
+                                    <core:Item key="ship"   text="Ship / Ferry" />
+                                </items>
+                            </Select>
+
+                            <!-- Travel Class — shown only for Flight / Train -->
+                            <VBox visible="{viewModel>/showTravelClass}">
+                                <Label text="Travel Class" design="Bold" />
+                                <Select id="travelClassSelect" width="100%" class="sapUiSmallMarginBottom">
+                                    <items>
+                                        <core:Item key="economy"  text="Economy" />
+                                        <core:Item key="business" text="Business" />
+                                        <core:Item key="first"    text="First Class" />
+                                    </items>
+                                </Select>
+                            </VBox>
+
+                        </VBox>
+                    </content>
+                </Panel>
+
+                <!-- Accommodation -->
+                <Panel headerText="Accommodation" expandable="false" class="sapUiSmallMarginBottom">
+                    <content>
+                        <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+
+                            <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                                <Label text="Accommodation Required" design="Bold" class="sapUiSmallMarginEnd" />
+                                <Switch id="accommodationSwitch" change=".onAccommodationChange" />
+                            </HBox>
+
+                            <VBox visible="{viewModel>/showAccommodation}">
+                                <Label text="Hotel Preference" design="Bold" />
+                                <Input id="hotelInput" placeholder="e.g. Marriott, Hilton or any preference" width="100%" class="sapUiSmallMarginBottom" />
+                            </VBox>
+
+                        </VBox>
+                    </content>
+                </Panel>
+
+                <!-- Budget Estimate -->
+                <Panel headerText="Budget Estimate" expandable="false" class="sapUiSmallMarginBottom">
+                    <content>
+                        <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+
+                            <Label text="Currency" design="Bold" />
+                            <Select id="currencySelect" width="100%" class="sapUiSmallMarginBottom">
+                                <items>
+                                    <core:Item key="qar" text="QAR - Qatari Riyal" />
+                                    <core:Item key="usd" text="USD - US Dollar" />
+                                    <core:Item key="eur" text="EUR - Euro" />
+                                    <core:Item key="gbp" text="GBP - British Pound" />
+                                    <core:Item key="aed" text="AED - UAE Dirham" />
+                                    <core:Item key="sar" text="SAR - Saudi Riyal" />
+                                </items>
+                            </Select>
+
+                            <Label text="Estimated Travel Cost" design="Bold" />
+                            <Input id="travelCostInput" placeholder="0.00" type="Number" width="100%" class="sapUiSmallMarginBottom" liveChange=".onCostChange" />
+
+                            <VBox visible="{viewModel>/showAccommodation}">
+                                <Label text="Estimated Accommodation Cost" design="Bold" />
+                                <Input id="accommodationCostInput" placeholder="0.00" type="Number" width="100%" class="sapUiSmallMarginBottom" liveChange=".onCostChange" />
+                            </VBox>
+
+                            <Label text="Total Estimated Budget" design="Bold" />
+                            <Input id="totalCostInput" placeholder="Auto calculated" enabled="false" width="100%" class="sapUiSmallMarginBottom" />
+
+                        </VBox>
+                    </content>
+                </Panel>
+
+                <!-- Justification -->
+                <Panel headerText="Justification" expandable="false" class="sapUiSmallMarginBottom">
+                    <content>
+                        <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+
+                            <Label text="Business Justification *" design="Bold" />
+                            <TextArea
+                                id="justificationTextArea"
+                                placeholder="Describe the business need and expected outcome of this travel..."
+                                rows="4"
+                                width="100%"
+                                class="sapUiSmallMarginBottom" />
+
+                            <Label text="Additional Notes" design="Bold" />
+                            <TextArea
+                                id="notesTextArea"
+                                placeholder="Any other information relevant to this travel request..."
+                                rows="3"
+                                width="100%"
+                                class="sapUiSmallMarginBottom" />
+
+                        </VBox>
+                    </content>
+                </Panel>
+
+                <!-- Action Buttons -->
+                <HBox justifyContent="End" class="sapUiSmallMarginBottom">
+                    <Button text="Cancel" type="Default" press=".onCancel" class="sapUiSmallMarginEnd" />
+                    <Button text="Submit Request" type="Emphasized" press=".onSubmit" />
+                </HBox>
+
+            </VBox>
+        </content>
+    </Page>
+
+</mvc:View>
