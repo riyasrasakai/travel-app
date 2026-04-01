@@ -4,7 +4,7 @@
     xmlns="sap.m">
 
     <Page
-        title="Travel Requests"
+        title="Travel Requestst"
         showNavButton="true"
         navButtonPress=".onBackToDashboard">
 
